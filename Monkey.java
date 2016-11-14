@@ -5,25 +5,29 @@ public class Monkey {
     private static int _monkeyNum = 0;
 
     private int _thisMonkeyNum = 0;
-    
+
     private int _id = -1;
 
     private Banana _b = null;
+
+/////////////////////////////////////////////////////////////////////////
 
     /**
      * Get this monkey's number
      * @return int monkey number
      */
-    
+
     public int getMonkeyNum() {
 	return _thisMonkeyNum;
     }
-    
+
+/////////////////////////////////////////////////////////////////////////
+
     /**
      * Getter for id.
      * @return id of monkey
      */
-    
+
     public int getId() throws NoIdException {
 	if (_id < 0) {
 	    throw new NoIdException();
@@ -31,6 +35,8 @@ public class Monkey {
 	    return _id;
 	}
     }
+
+/////////////////////////////////////////////////////////////////////////
 
     /**
      * Return which monkey should get banana next.
@@ -45,68 +51,98 @@ public class Monkey {
 	}
     }
 
+/////////////////////////////////////////////////////////////////////////
+
     /**
      * Checks to see if this monkey has a banana
      * @return true if has banana, false otherwise
      */
-    
+
     public boolean hasBanana() {
 	return _b != null;
     }
+
+/////////////////////////////////////////////////////////////////////////
 
     /**
      * Receive a banana from another monkey
      * @param b - Banana given to this monkey
      */
-    
+
     public void throwBananaTo(Banana b) {
 	_b = b;
     }
 
+/////////////////////////////////////////////////////////////////////////
+
     /**
-     * 
+     *
      * @return Banana - the banana this monkey held
      */
-    
+
     public Banana throwBananaFrom() {
 	Banana toReturn = _b;
 	_b = null;
 	return toReturn;
     }
-    
+
+/////////////////////////////////////////////////////////////////////////
+
     /**
      * Generate a unique ID for this monkey.
-     * Note that monkey ID generation must 
+     * Note that monkey ID generation must
      * always return the correct value for
      * a given n (i.e., the id for the first
      * monkey should always be the same).
      * @param int n - monkey number
      * @return int - id for this monkey
      */
-    
+
     public int generateId(int n) {
-	int toReturn = 100;
-	int bird = -900;
-	for (int l=0; l <1000; l++) {
-	    for (int m = 0; m < 100; m++) {
-		bird += Math.round(Math.atan(l + m));
-		bird -= Math.round(Math.sin(m * m)) * Math.exp(m * m);
-		toReturn += bird;
-	    }
-	}
-	toReturn += 10;
-	toReturn += n;
-	return toReturn;
+    	int toReturn = 100;
+    	int bird = -900;
+    	for (int l=0; l <1000; l++) {
+    	    for (int m = 0; m < 100; m++) {
+        		bird += Math.round(Math.atan(l + m));
+        		bird -= Math.round(Math.sin(m * m)) * Math.exp(m * m);
+        		toReturn += bird;
+    	    }
+    	}
+    	toReturn += 10;
+    	toReturn += n;
+    	return toReturn;
     }
+
+    // REFACTORED VERSION OF NEXTMONKEYANDRESIZEREFACTORED
+    // REMOVED MATH FUNCTIONS AND LOOPS AND JUST ADDED RESULT
+    // OF PREVIOUS CALCULATIONS TO KEEP ID RESTULTS CONSISTENT
+
+    public int generateIdRefactored(int n) {
+      int toReturn = 100;
+      if (n > 0) {
+        return toReturn += (223392 + n);
+      }
+      return 0;
+    }
+
+/////////////////////////////////////////////////////////////////////////
 
     /**
      * Monkey constructor
      */
-    
+
     public Monkey() {
 	_thisMonkeyNum = _monkeyNum;
 	_monkeyNum++;
-	_id = generateId(_thisMonkeyNum);
+	// _id = generateId(_thisMonkeyNum); // ORIGINAL METHOD
+  _id = generateIdRefactored(_thisMonkeyNum); // REFACTORED METHOD
+
     }
-    
+
+/////////////////////////////////////////////////////////////////////////
+
+  public String toString() {
+    return "Monkey: " + _thisMonkeyNum;
+  }
+
 }
