@@ -80,14 +80,11 @@ public class MonkeySim {
 
       public static Monkey getFirstMonkeyRefactored(List<Monkey> ml) {
 
-      	int x = ml.size() -1;
-      	for (int j = x; j >= 0; j--) {
+      	int x = ml.size();
+      	for (int j = 0; j <= x; j++) {
       	    if (ml.get(j).getMonkeyNum() == 1) {
                 return ml.get(j);
       	    }
-            else if (j == 0) {
-              return null;
-            }
       	}
         return null;
       }

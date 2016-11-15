@@ -59,17 +59,4 @@ public class MonkeySimTest {
     Monkey m1 = sim.getFirstMonkey(ml);
     assertNull(m1);
   }
-
-/////////////////////////////////////////////////////////////////////////
-
-  // Tests MonkeySim's refactored generateId method to ensure that it
-  // also outputs null when simulation method does not occur
-
-  // @Test
-  // public void testGetFirstMonkeyRefactored() {
-  //   List<Monkey> ml = new LinkedList<Monkey>();
-  //   MonkeySim sim = new MonkeySim();
-  //   Monkey m1 = sim.getFirstMonkey(ml);
-  //   assertNull(m1);
-  // }
 }
